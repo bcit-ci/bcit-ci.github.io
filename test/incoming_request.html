@@ -1,0 +1,1060 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>IncomingRequest Class &mdash; CodeIgniter4 4.0.0-dev documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/ci-icon.ico"/>
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/citheme.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="CodeIgniter4 4.0.0-dev documentation" href="../index.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div id="nav">
+  <div id="nav_inner">
+    
+    
+    
+      <div id="pulldown-menu" class="ciNav">
+        <ul>
+<li class="toctree-l1"><a class="reference internal" href="../intro/index.html">Welcome to CodeIgniter4</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../intro/index.html">Welcome to CodeIgniter4</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intro/requirements.html">Server Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intro/credits.html">Credits</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intro/psr.html">PSR Compliance</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../installation/index.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../installation/downloads.html">Downloading CodeIgniter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation/index.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation/upgrading.html">Upgrading From a Previous Version</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation/troubleshooting.html">Troubleshooting</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/index.html">Tutorial</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial/static_pages.html">Static pages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial/news_section.html">News section</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial/create_news_items.html">Create news items</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial/conclusion.html">Conclusion</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/index.html">CodeIgniter4 Overview</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../concepts/structure.html">Application Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../concepts/mvc.html">Models, Views, and Controllers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../concepts/autoloader.html">Autoloading Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../concepts/services.html">Services</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../concepts/http.html">Working With HTTP Requests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../concepts/security.html">Security Guidelines</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../general/index.html">General Topics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../general/configuration.html">Working With Configuration Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/urls.html">CodeIgniter URLs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/controllers.html">Controllers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/views.html">Views</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/helpers.html">Helpers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/core_classes.html">Creating Core System Classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/hooks.html">Hooks - Extending the Framework Core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/common_functions.html">Global Functions and Constants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/routing.html">URI Routing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/logging.html">Logging Information</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/errors.html">Error Handling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/debugging.html">Debugging Your Application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/cli.html">Running via the CLI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/managing_apps.html">Managing your Applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/environments.html">Handling Multiple Environments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/alternative_php.html">Alternate PHP Syntax for View Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/testing.html">Testing</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../libraries/index.html">Library Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/benchmark.html">Benchmarking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/cli.html">CLI Library</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/content_negotiation.html">Content Negotiation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/curlrequest.html">CURLRequest Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/incomingrequest.html">IncomingRequest Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/message.html">HTTP Messages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/request.html">Request Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/response.html">HTTP Responses</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/response.html#class-reference">Class Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/security.html">Security Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/sessions.html">Session Library</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/uploaded_files.html">Working with Uploaded Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/uri.html">Working with URIs</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../database/index.html">Database Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../database/examples.html">Quick Start: Usage Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../database/configuration.html">Database Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../database/connecting.html">Connecting to a Database</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../database/queries.html">Running Queries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../database/results.html">Generating Query Results</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../database/helpers.html">Query Helper Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../database/query_builder.html">Query Builder Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../database/transactions.html">Transactions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../database/metadata.html">Getting MetaData</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../database/call_function.html">Custom Function Calls</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../database/model.html">Using CodeIgniter&#8217;s Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../database/forge.html">Database Manipulation with Database Forge</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../database/migration.html">Database Migrations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../database/seeds.html">Database Seeding</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../helpers/index.html">Helpers</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributing to CodeIgniter</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../contributing/guidelines.html">Contribution Guidelines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contributing/workflow.html">Contribution Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contributing/signing.html">Contribution Signing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contributing/roadmap.html">CodeIgniter4 Roadmap</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contributing/internals.html">CodeIgniter Internals Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contributing/documentation.html">Writing CodeIgniter Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contributing/styleguide.html">PHP Style Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../DCO.html">Developer&#8217;s Certificate of Origin 1.1</a></li>
+</ul>
+</li>
+</ul>
+
+      </div>
+    
+      
+  </div>
+</div>
+<div id="nav2">
+  <a href="#" id="openToc">
+    <img src="data:image/jpeg;base64,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" title="Toggle Table of Contents" alt="Toggle Table of Contents" />
+  </a>
+</div>
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        
+          <a href="../index.html" class="fa fa-home"> CodeIgniter4</a>
+        
+        
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+          
+          
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../intro/index.html">Welcome to CodeIgniter4</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../intro/index.html">Welcome to CodeIgniter4</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intro/requirements.html">Server Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intro/credits.html">Credits</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intro/psr.html">PSR Compliance</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../installation/index.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../installation/downloads.html">Downloading CodeIgniter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation/index.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation/upgrading.html">Upgrading From a Previous Version</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation/troubleshooting.html">Troubleshooting</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/index.html">Tutorial</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial/static_pages.html">Static pages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial/news_section.html">News section</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial/create_news_items.html">Create news items</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial/conclusion.html">Conclusion</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/index.html">CodeIgniter4 Overview</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../concepts/structure.html">Application Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../concepts/mvc.html">Models, Views, and Controllers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../concepts/autoloader.html">Autoloading Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../concepts/services.html">Services</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../concepts/http.html">Working With HTTP Requests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../concepts/security.html">Security Guidelines</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../general/index.html">General Topics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../general/configuration.html">Working With Configuration Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/urls.html">CodeIgniter URLs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/controllers.html">Controllers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/views.html">Views</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/helpers.html">Helpers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/core_classes.html">Creating Core System Classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/hooks.html">Hooks - Extending the Framework Core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/common_functions.html">Global Functions and Constants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/routing.html">URI Routing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/logging.html">Logging Information</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/errors.html">Error Handling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/debugging.html">Debugging Your Application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/cli.html">Running via the CLI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/managing_apps.html">Managing your Applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/environments.html">Handling Multiple Environments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/alternative_php.html">Alternate PHP Syntax for View Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/testing.html">Testing</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../libraries/index.html">Library Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/benchmark.html">Benchmarking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/cli.html">CLI Library</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/content_negotiation.html">Content Negotiation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/curlrequest.html">CURLRequest Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/incomingrequest.html">IncomingRequest Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/message.html">HTTP Messages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/request.html">Request Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/response.html">HTTP Responses</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/response.html#class-reference">Class Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/security.html">Security Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/sessions.html">Session Library</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/uploaded_files.html">Working with Uploaded Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/uri.html">Working with URIs</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../database/index.html">Database Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../database/examples.html">Quick Start: Usage Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../database/configuration.html">Database Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../database/connecting.html">Connecting to a Database</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../database/queries.html">Running Queries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../database/results.html">Generating Query Results</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../database/helpers.html">Query Helper Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../database/query_builder.html">Query Builder Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../database/transactions.html">Transactions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../database/metadata.html">Getting MetaData</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../database/call_function.html">Custom Function Calls</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../database/model.html">Using CodeIgniter&#8217;s Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../database/forge.html">Database Manipulation with Database Forge</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../database/migration.html">Database Migrations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../database/seeds.html">Database Seeding</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../helpers/index.html">Helpers</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributing to CodeIgniter</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../contributing/guidelines.html">Contribution Guidelines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contributing/workflow.html">Contribution Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contributing/signing.html">Contribution Signing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contributing/roadmap.html">CodeIgniter4 Roadmap</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contributing/internals.html">CodeIgniter Internals Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contributing/documentation.html">Writing CodeIgniter Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contributing/styleguide.html">PHP Style Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../DCO.html">Developer&#8217;s Certificate of Origin 1.1</a></li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">CodeIgniter4</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+    <li>IncomingRequest Class</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+    <div style="float:right;margin-left:5px;" id="closeMe">
+      <img title="Classic Layout" alt="classic layout" src="data:image/gif;base64,R0lGODlhFAAUAJEAAAAAADMzM////wAAACH5BAUUAAIALAAAAAAUABQAAAImlI+py+0PU5gRBRDM3DxbWoXis42X13USOLauUIqnlsaH/eY6UwAAOw==" />
+    </div>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document">
+            
+  <div class="section" id="incomingrequest-class">
+<h1>IncomingRequest Class<a class="headerlink" href="#incomingrequest-class" title="Permalink to this headline">¶</a></h1>
+<p>Class IncomingRequest</p>
+<p>Represents an incoming, getServer-side HTTP request.</p>
+<p>Per the HTTP specification, this interface includes properties for
+each of the following:</p>
+<ul class="simple">
+<li>Protocol version</li>
+<li>HTTP method</li>
+<li>URI</li>
+<li>Headers</li>
+<li>Message body</li>
+</ul>
+<p>Additionally, it encapsulates all data as it has arrived to the
+application from the CGI and/or PHP environment, including:</p>
+<ul class="simple">
+<li>The values represented in $_SERVER.</li>
+<li>Any cookies provided (generally via $_COOKIE)</li>
+<li>Query string arguments (generally via $_GET, or as parsed via parse_str())</li>
+<li>Upload files, if any (as represented by $_FILES)</li>
+<li>Deserialized body binds (generally from $_POST)</li>
+</ul>
+<dl class="class">
+<dt>
+<tt class="descname">CodeIgniter\HTTP\IncomingRequest</tt></dt>
+<dd><p>Implements: CodeIgniterHTTPRequestInterface</p>
+<dl class="method">
+<dt id="__construct">
+<tt class="descname">__construct</tt><big>(</big><em>$config</em><span class="optional">[</span>, <em>$uri</em><span class="optional">[</span>, <em>$body</em><span class="optional">]</span><span class="optional">]</span><big>)</big><a class="headerlink" href="#__construct" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>$config</strong> &#8211; </li>
+<li><strong>$uri</strong> &#8211; </li>
+<li><strong>$body</strong> &#8211; </li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+</dd></dl>
+
+<dl class="method">
+<dt id="isCLI">
+<tt class="descname">isCLI</tt><big>(</big><big>)</big><a class="headerlink" href="#isCLI" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">bool</td>
+</tr>
+</tbody>
+</table>
+<p>Determines if this request was made from the command line (CLI).</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="isAJAX">
+<tt class="descname">isAJAX</tt><big>(</big><big>)</big><a class="headerlink" href="#isAJAX" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">bool</td>
+</tr>
+</tbody>
+</table>
+<p>Test to see if a request contains the HTTP_X_REQUESTED_WITH header.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="getGet">
+<tt class="descname">getGet</tt><big>(</big><span class="optional">[</span><em>$index</em><span class="optional">[</span>, <em>$filter</em><span class="optional">]</span><span class="optional">]</span><big>)</big><a class="headerlink" href="#getGet" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>$index</strong> &#8211; </li>
+<li><strong>$filter</strong> &#8211; </li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Fetch an item from GET data.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="getPost">
+<tt class="descname">getPost</tt><big>(</big><span class="optional">[</span><em>$index</em><span class="optional">[</span>, <em>$filter</em><span class="optional">]</span><span class="optional">]</span><big>)</big><a class="headerlink" href="#getPost" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>$index</strong> &#8211; </li>
+<li><strong>$filter</strong> &#8211; </li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Fetch an item from POST.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="getPostGet">
+<tt class="descname">getPostGet</tt><big>(</big><span class="optional">[</span><em>$index</em><span class="optional">[</span>, <em>$filter</em><span class="optional">]</span><span class="optional">]</span><big>)</big><a class="headerlink" href="#getPostGet" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>$index</strong> &#8211; </li>
+<li><strong>$filter</strong> &#8211; </li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Fetch an item from POST data with fallback to GET.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="getGetPost">
+<tt class="descname">getGetPost</tt><big>(</big><span class="optional">[</span><em>$index</em><span class="optional">[</span>, <em>$filter</em><span class="optional">]</span><span class="optional">]</span><big>)</big><a class="headerlink" href="#getGetPost" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>$index</strong> &#8211; </li>
+<li><strong>$filter</strong> &#8211; </li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Fetch an item from GET data with fallback to POST.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="getCookie">
+<tt class="descname">getCookie</tt><big>(</big><span class="optional">[</span><em>$index</em><span class="optional">[</span>, <em>$filter</em><span class="optional">]</span><span class="optional">]</span><big>)</big><a class="headerlink" href="#getCookie" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>$index</strong> &#8211; </li>
+<li><strong>$filter</strong> &#8211; </li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Fetch an item from the COOKIE array.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="getUserAgent">
+<tt class="descname">getUserAgent</tt><big>(</big><span class="optional">[</span><em>$filter</em><span class="optional">]</span><big>)</big><a class="headerlink" href="#getUserAgent" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>$filter</strong> &#8211; </li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Fetch the user agent string</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="setCookie">
+<tt class="descname">setCookie</tt><big>(</big><em>$name</em><span class="optional">[</span>, <em>$value</em><span class="optional">[</span>, <em>$expire</em><span class="optional">[</span>, <em>$domain</em><span class="optional">[</span>, <em>$path</em><span class="optional">[</span>, <em>$prefix</em><span class="optional">[</span>, <em>$secure</em><span class="optional">[</span>, <em>$httponly</em><span class="optional">]</span><span class="optional">]</span><span class="optional">]</span><span class="optional">]</span><span class="optional">]</span><span class="optional">]</span><span class="optional">]</span><big>)</big><a class="headerlink" href="#setCookie" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>$name</strong> &#8211; </li>
+<li><strong>$value</strong> &#8211; </li>
+<li><strong>$expire</strong> &#8211; </li>
+<li><strong>$domain</strong> &#8211; </li>
+<li><strong>$path</strong> &#8211; </li>
+<li><strong>$prefix</strong> &#8211; </li>
+<li><strong>$secure</strong> &#8211; </li>
+<li><strong>$httponly</strong> &#8211; </li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Set a cookie</p>
+<p>Accepts an arbitrary number of binds (up to 7) or an associateive
+array in the first parameter containing all the values.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="isSecure">
+<tt class="descname">isSecure</tt><big>(</big><big>)</big><a class="headerlink" href="#isSecure" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">bool</td>
+</tr>
+</tbody>
+</table>
+<p>Attempts to detect if the current connection is secure through
+a few different methods.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="getFiles">
+<tt class="descname">getFiles</tt><big>(</big><big>)</big><a class="headerlink" href="#getFiles" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">array</td>
+</tr>
+</tbody>
+</table>
+<p>Returns an array of all files that have been uploaded with this
+request. Each file is represented by an UploadedFile instance.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="getFile">
+<tt class="descname">getFile</tt><big>(</big><em>string $fileID</em><big>)</big><a class="headerlink" href="#getFile" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>$fileID</strong> (<em>string</em>) &#8211; </li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Retrieves a single file by the name of the input field used
+to upload it.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="detectPath">
+<tt class="descname">detectPath</tt><big>(</big><em>$protocol</em><big>)</big><a class="headerlink" href="#detectPath" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>$protocol</strong> &#8211; </li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Based on the URIProtocol Config setting, will attempt to
+detect the path portion of the current URI.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="negotiate">
+<tt class="descname">negotiate</tt><big>(</big><em>string $type array $supported</em><span class="optional">[</span>, <em>bool $strictMatch</em><span class="optional">]</span><big>)</big><a class="headerlink" href="#negotiate" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>$type</strong> (<em>string</em>) &#8211; </li>
+<li><strong>$supported</strong> (<em>array</em>) &#8211; </li>
+<li><strong>$strictMatch</strong> (<em>bool</em>) &#8211; </li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Provides a convenient way to work with the Negotiate class
+for content negotiation.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="getIPAddress">
+<tt class="descname">getIPAddress</tt><big>(</big><big>)</big><a class="headerlink" href="#getIPAddress" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">string</td>
+</tr>
+</tbody>
+</table>
+<p>Gets the user&#8217;s IP address.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="isValidIP">
+<tt class="descname">isValidIP</tt><big>(</big><em>string $ip</em><span class="optional">[</span>, <em>string $which</em><span class="optional">]</span><big>)</big><a class="headerlink" href="#isValidIP" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>$ip</strong> (<em>string</em>) &#8211; </li>
+<li><strong>$which</strong> (<em>string</em>) &#8211; </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"></p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">bool</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Validate an IP address</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="getMethod">
+<tt class="descname">getMethod</tt><big>(</big><span class="optional">[</span><em>$upper</em><span class="optional">]</span><big>)</big><a class="headerlink" href="#getMethod" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>$upper</strong> &#8211; </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"></p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">string</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Get the request method.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="getServer">
+<tt class="descname">getServer</tt><big>(</big><span class="optional">[</span><em>$index</em><span class="optional">[</span>, <em>$filter</em><span class="optional">]</span><span class="optional">]</span><big>)</big><a class="headerlink" href="#getServer" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>$index</strong> &#8211; </li>
+<li><strong>$filter</strong> &#8211; </li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Fetch an item from the $_SERVER array.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="getEnv">
+<tt class="descname">getEnv</tt><big>(</big><span class="optional">[</span><em>$index</em><span class="optional">[</span>, <em>$filter</em><span class="optional">]</span><span class="optional">]</span><big>)</big><a class="headerlink" href="#getEnv" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>$index</strong> &#8211; </li>
+<li><strong>$filter</strong> &#8211; </li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Fetch an item from the $_ENV array.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="getBody">
+<tt class="descname">getBody</tt><big>(</big><big>)</big><a class="headerlink" href="#getBody" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns the Message&#8217;s body.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="setBody">
+<tt class="descname">setBody</tt><big>(</big><em>&amp;$data</em><big>)</big><a class="headerlink" href="#setBody" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>$data</strong> &#8211; </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"></p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">self</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Sets the body of the current message.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="populateHeaders">
+<tt class="descname">populateHeaders</tt><big>(</big><big>)</big><a class="headerlink" href="#populateHeaders" title="Permalink to this definition">¶</a></dt>
+<dd><p>Populates the $headers array with any headers the getServer knows about.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="getHeaders">
+<tt class="descname">getHeaders</tt><big>(</big><big>)</big><a class="headerlink" href="#getHeaders" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">array</td>
+</tr>
+</tbody>
+</table>
+<p>Returns an array containing all headers.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="getHeader">
+<tt class="descname">getHeader</tt><big>(</big><em>$name</em><big>)</big><a class="headerlink" href="#getHeader" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first last simple">
+<li><strong>$name</strong> &#8211; </li>
+</ul>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Returns a single header object. If multiple headers with the same
+name exist, then will return an array of header objects.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="hasHeader">
+<tt class="descname">hasHeader</tt><big>(</big><em>$name</em><big>)</big><a class="headerlink" href="#hasHeader" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>$name</strong> &#8211; </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"></p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">bool</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Determines whether a header exists.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="getHeaderLine">
+<tt class="descname">getHeaderLine</tt><big>(</big><em>string $name</em><big>)</big><a class="headerlink" href="#getHeaderLine" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>$name</strong> (<em>string</em>) &#8211; </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"></p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">string</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Retrieves a comma-separated string of the values for a single header.</p>
+<p>This method returns all of the header values of the given
+case-insensitive header name as a string concatenated together using
+a comma.</p>
+<p>NOTE: Not all header values may be appropriately represented using
+comma concatenation. For such headers, use getHeader() instead
+and supply your own delimiter when concatenating.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="setHeader">
+<tt class="descname">setHeader</tt><big>(</big><em>string $name $value</em><big>)</big><a class="headerlink" href="#setHeader" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>$name</strong> (<em>string</em>) &#8211; </li>
+<li><strong>$value</strong> &#8211; </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"></p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">self</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Sets a header and it&#8217;s value.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="removeHeader">
+<tt class="descname">removeHeader</tt><big>(</big><em>string $name</em><big>)</big><a class="headerlink" href="#removeHeader" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>$name</strong> (<em>string</em>) &#8211; </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"></p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">self</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Removes a header from the list of headers we track.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="appendHeader">
+<tt class="descname">appendHeader</tt><big>(</big><em>string $name $value</em><big>)</big><a class="headerlink" href="#appendHeader" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>$name</strong> (<em>string</em>) &#8211; </li>
+<li><strong>$value</strong> &#8211; </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"></p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">self</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Adds an additional header value to any headers that accept
+multiple values (i.e. are an array or implement ArrayAccess)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="prependHeader">
+<tt class="descname">prependHeader</tt><big>(</big><em>string $name $value</em><big>)</big><a class="headerlink" href="#prependHeader" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>$name</strong> (<em>string</em>) &#8211; </li>
+<li><strong>$value</strong> &#8211; </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"></p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">self</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Adds an additional header value to any headers that accept
+multiple values (i.e. are an array or implement ArrayAccess)</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="getProtocolVersion">
+<tt class="descname">getProtocolVersion</tt><big>(</big><big>)</big><a class="headerlink" href="#getProtocolVersion" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Returns:</th><td class="field-body"></td>
+</tr>
+<tr class="field-even field"><th class="field-name">Return type:</th><td class="field-body">string</td>
+</tr>
+</tbody>
+</table>
+<p>Returns the HTTP Protocol Version.</p>
+</dd></dl>
+
+<dl class="method">
+<dt id="setProtocolVersion">
+<tt class="descname">setProtocolVersion</tt><big>(</big><em>string $version</em><big>)</big><a class="headerlink" href="#setProtocolVersion" title="Permalink to this definition">¶</a></dt>
+<dd><table class="docutils field-list" frame="void" rules="none">
+<col class="field-name" />
+<col class="field-body" />
+<tbody valign="top">
+<tr class="field-odd field"><th class="field-name">Parameters:</th><td class="field-body"><ul class="first simple">
+<li><strong>$version</strong> (<em>string</em>) &#8211; </li>
+</ul>
+</td>
+</tr>
+<tr class="field-even field"><th class="field-name">Returns:</th><td class="field-body"><p class="first"></p>
+</td>
+</tr>
+<tr class="field-odd field"><th class="field-name">Return type:</th><td class="field-body"><p class="first last">self</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>Sets the HTTP protocol version.</p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2014 - 2016, British Columbia Institute of Technology.
+       Last updated on Jun 25, 2016.
+    </p>
+  </div>
+
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'4.0.0-dev',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  false
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

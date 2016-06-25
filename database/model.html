@@ -1,0 +1,816 @@
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Using CodeIgniter’s Model &mdash; CodeIgniter4 4.0.0-dev documentation</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="../_static/ci-icon.ico"/>
+  
+
+  
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic|Roboto+Slab:400,700|Inconsolata:400,700&subset=latin,cyrillic' rel='stylesheet' type='text/css'>
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="../_static/css/citheme.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="CodeIgniter4 4.0.0-dev documentation" href="../index.html"/>
+        <link rel="up" title="Database Reference" href="index.html"/>
+        <link rel="next" title="Database Forge Class" href="forge.html"/>
+        <link rel="prev" title="Custom Function Calls" href="call_function.html"/> 
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.6.2/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div id="nav">
+  <div id="nav_inner">
+    
+    
+    
+      <div id="pulldown-menu" class="ciNav">
+        <ul>
+<li class="toctree-l1"><a class="reference internal" href="../intro/index.html">Welcome to CodeIgniter4</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../intro/index.html">Welcome to CodeIgniter4</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intro/requirements.html">Server Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intro/credits.html">Credits</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intro/psr.html">PSR Compliance</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../installation/index.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../installation/downloads.html">Downloading CodeIgniter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation/index.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation/upgrading.html">Upgrading From a Previous Version</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation/troubleshooting.html">Troubleshooting</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/index.html">Tutorial</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial/static_pages.html">Static pages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial/news_section.html">News section</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial/create_news_items.html">Create news items</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial/conclusion.html">Conclusion</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/index.html">CodeIgniter4 Overview</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../concepts/structure.html">Application Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../concepts/mvc.html">Models, Views, and Controllers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../concepts/autoloader.html">Autoloading Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../concepts/services.html">Services</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../concepts/http.html">Working With HTTP Requests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../concepts/security.html">Security Guidelines</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../general/index.html">General Topics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../general/configuration.html">Working With Configuration Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/urls.html">CodeIgniter URLs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/controllers.html">Controllers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/views.html">Views</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/helpers.html">Helpers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/core_classes.html">Creating Core System Classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/hooks.html">Hooks - Extending the Framework Core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/common_functions.html">Global Functions and Constants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/routing.html">URI Routing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/logging.html">Logging Information</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/errors.html">Error Handling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/debugging.html">Debugging Your Application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/cli.html">Running via the CLI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/managing_apps.html">Managing your Applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/environments.html">Handling Multiple Environments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/alternative_php.html">Alternate PHP Syntax for View Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/testing.html">Testing</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../libraries/index.html">Library Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/benchmark.html">Benchmarking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/cli.html">CLI Library</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/content_negotiation.html">Content Negotiation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/curlrequest.html">CURLRequest Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/incomingrequest.html">IncomingRequest Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/message.html">HTTP Messages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/request.html">Request Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/response.html">HTTP Responses</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/response.html#class-reference">Class Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/security.html">Security Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/sessions.html">Session Library</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/uploaded_files.html">Working with Uploaded Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/uri.html">Working with URIs</a></li>
+</ul>
+</li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Database Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="examples.html">Quick Start: Usage Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration.html">Database Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="connecting.html">Connecting to a Database</a></li>
+<li class="toctree-l2"><a class="reference internal" href="queries.html">Running Queries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="results.html">Generating Query Results</a></li>
+<li class="toctree-l2"><a class="reference internal" href="helpers.html">Query Helper Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="query_builder.html">Query Builder Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="transactions.html">Transactions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metadata.html">Getting MetaData</a></li>
+<li class="toctree-l2"><a class="reference internal" href="call_function.html">Custom Function Calls</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">Using CodeIgniter&#8217;s Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="forge.html">Database Manipulation with Database Forge</a></li>
+<li class="toctree-l2"><a class="reference internal" href="migration.html">Database Migrations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="seeds.html">Database Seeding</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../helpers/index.html">Helpers</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributing to CodeIgniter</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../contributing/guidelines.html">Contribution Guidelines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contributing/workflow.html">Contribution Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contributing/signing.html">Contribution Signing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contributing/roadmap.html">CodeIgniter4 Roadmap</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contributing/internals.html">CodeIgniter Internals Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contributing/documentation.html">Writing CodeIgniter Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contributing/styleguide.html">PHP Style Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../DCO.html">Developer&#8217;s Certificate of Origin 1.1</a></li>
+</ul>
+</li>
+</ul>
+
+      </div>
+    
+      
+  </div>
+</div>
+<div id="nav2">
+  <a href="#" id="openToc">
+    <img src="data:image/jpeg;base64,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" title="Toggle Table of Contents" alt="Toggle Table of Contents" />
+  </a>
+</div>
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-nav-search">
+        
+          <a href="../index.html" class="fa fa-home"> CodeIgniter4</a>
+        
+        
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+        
+          
+          
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="../intro/index.html">Welcome to CodeIgniter4</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../intro/index.html">Welcome to CodeIgniter4</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intro/requirements.html">Server Requirements</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intro/credits.html">Credits</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../intro/psr.html">PSR Compliance</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../installation/index.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../installation/downloads.html">Downloading CodeIgniter</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation/index.html">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation/upgrading.html">Upgrading From a Previous Version</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../installation/troubleshooting.html">Troubleshooting</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../tutorial/index.html">Tutorial</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial/static_pages.html">Static pages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial/news_section.html">News section</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial/create_news_items.html">Create news items</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../tutorial/conclusion.html">Conclusion</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../concepts/index.html">CodeIgniter4 Overview</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../concepts/structure.html">Application Structure</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../concepts/mvc.html">Models, Views, and Controllers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../concepts/autoloader.html">Autoloading Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../concepts/services.html">Services</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../concepts/http.html">Working With HTTP Requests</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../concepts/security.html">Security Guidelines</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../general/index.html">General Topics</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../general/configuration.html">Working With Configuration Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/urls.html">CodeIgniter URLs</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/controllers.html">Controllers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/views.html">Views</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/helpers.html">Helpers</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/core_classes.html">Creating Core System Classes</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/hooks.html">Hooks - Extending the Framework Core</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/common_functions.html">Global Functions and Constants</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/routing.html">URI Routing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/logging.html">Logging Information</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/errors.html">Error Handling</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/debugging.html">Debugging Your Application</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/cli.html">Running via the CLI</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/managing_apps.html">Managing your Applications</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/environments.html">Handling Multiple Environments</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/alternative_php.html">Alternate PHP Syntax for View Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../general/testing.html">Testing</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../libraries/index.html">Library Reference</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/benchmark.html">Benchmarking</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/cli.html">CLI Library</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/content_negotiation.html">Content Negotiation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/curlrequest.html">CURLRequest Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/incomingrequest.html">IncomingRequest Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/message.html">HTTP Messages</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/request.html">Request Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/response.html">HTTP Responses</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/response.html#class-reference">Class Reference</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/security.html">Security Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/sessions.html">Session Library</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/uploaded_files.html">Working with Uploaded Files</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../libraries/uri.html">Working with URIs</a></li>
+</ul>
+</li>
+</ul>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Database Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="examples.html">Quick Start: Usage Examples</a></li>
+<li class="toctree-l2"><a class="reference internal" href="configuration.html">Database Configuration</a></li>
+<li class="toctree-l2"><a class="reference internal" href="connecting.html">Connecting to a Database</a></li>
+<li class="toctree-l2"><a class="reference internal" href="queries.html">Running Queries</a></li>
+<li class="toctree-l2"><a class="reference internal" href="results.html">Generating Query Results</a></li>
+<li class="toctree-l2"><a class="reference internal" href="helpers.html">Query Helper Functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="query_builder.html">Query Builder Class</a></li>
+<li class="toctree-l2"><a class="reference internal" href="transactions.html">Transactions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="metadata.html">Getting MetaData</a></li>
+<li class="toctree-l2"><a class="reference internal" href="call_function.html">Custom Function Calls</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="">Using CodeIgniter&#8217;s Model</a></li>
+<li class="toctree-l2"><a class="reference internal" href="forge.html">Database Manipulation with Database Forge</a></li>
+<li class="toctree-l2"><a class="reference internal" href="migration.html">Database Migrations</a></li>
+<li class="toctree-l2"><a class="reference internal" href="seeds.html">Database Seeding</a></li>
+</ul>
+</li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../helpers/index.html">Helpers</a></li>
+</ul>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../contributing/index.html">Contributing to CodeIgniter</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="../contributing/guidelines.html">Contribution Guidelines</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contributing/workflow.html">Contribution Workflow</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contributing/signing.html">Contribution Signing</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contributing/roadmap.html">CodeIgniter4 Roadmap</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contributing/internals.html">CodeIgniter Internals Overview</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contributing/documentation.html">Writing CodeIgniter Documentation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../contributing/styleguide.html">PHP Style Guide</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../DCO.html">Developer&#8217;s Certificate of Origin 1.1</a></li>
+</ul>
+</li>
+</ul>
+
+          
+        
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">CodeIgniter4</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+      
+        <li><a href="index.html">Database Reference</a> &raquo;</li>
+      
+    <li>Using CodeIgniter&#8217;s Model</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+    <div style="float:right;margin-left:5px;" id="closeMe">
+      <img title="Classic Layout" alt="classic layout" src="data:image/gif;base64,R0lGODlhFAAUAJEAAAAAADMzM////wAAACH5BAUUAAIALAAAAAAUABQAAAImlI+py+0PU5gRBRDM3DxbWoXis42X13USOLauUIqnlsaH/eY6UwAAOw==" />
+    </div>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document">
+            
+  <div class="section" id="using-codeigniter-s-model">
+<h1>Using CodeIgniter&#8217;s Model<a class="headerlink" href="#using-codeigniter-s-model" title="Permalink to this headline">¶</a></h1>
+<div class="contents local topic" id="contents">
+<ul class="simple">
+<li><a class="reference internal" href="#manual-model-creation" id="id1">Manual Model Creation</a></li>
+<li><a class="reference internal" href="#codeigniter-s-model" id="id2">CodeIgniter&#8217;s Model</a></li>
+<li><a class="reference internal" href="#creating-your-model" id="id3">Creating Your Model</a><ul>
+<li><a class="reference internal" href="#connecting-to-the-database" id="id4">Connecting to the Database</a></li>
+<li><a class="reference internal" href="#configuring-your-model" id="id5">Configuring Your Model</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#working-with-data" id="id6">Working With Data</a><ul>
+<li><a class="reference internal" href="#finding-data" id="id7">Finding Data</a></li>
+<li><a class="reference internal" href="#saving-data" id="id8">Saving Data</a></li>
+<li><a class="reference internal" href="#deleting-data" id="id9">Deleting Data</a></li>
+<li><a class="reference internal" href="#protecting-fields" id="id10">Protecting Fields</a></li>
+<li><a class="reference internal" href="#working-with-query-builder" id="id11">Working With Query Builder</a></li>
+<li><a class="reference internal" href="#runtime-return-type-changes" id="id12">Runtime Return Type Changes</a></li>
+<li><a class="reference internal" href="#processing-large-amounts-of-data" id="id13">Processing Large Amounts of Data</a></li>
+<li><a class="reference internal" href="#obfuscating-ids-in-urls" id="id14">Obfuscating IDs in URLs</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<div class="section" id="manual-model-creation">
+<h2><a class="toc-backref" href="#id1">Manual Model Creation</a><a class="headerlink" href="#manual-model-creation" title="Permalink to this headline">¶</a></h2>
+<p>You do not need to extend any special class to create a model for your application. All you need is to get an
+instance of the database connection and you&#8217;re good to go.</p>
+<div class="highlight-ci"><div class="highlight"><pre><span class="k">use</span> <span class="nx">\CodeIgniter\Database\ConnectionInterface</span><span class="p">;</span>
+
+<span class="k">class</span> <span class="nc">UserModel</span>
+<span class="p">{</span>
+        <span class="k">protected</span> <span class="nv">$db</span><span class="p">;</span>
+
+        <span class="k">public</span> <span class="k">function</span> <span class="nf">__construct</span><span class="p">(</span><span class="nx">ConnectionInterface</span> <span class="o">&amp;</span><span class="nv">$db</span><span class="p">)</span>
+        <span class="p">{</span>
+                <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">db</span> <span class="o">=&amp;</span> <span class="nv">$db</span><span class="p">;</span>
+        <span class="p">}</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="codeigniter-s-model">
+<h2><a class="toc-backref" href="#id2">CodeIgniter&#8217;s Model</a><a class="headerlink" href="#codeigniter-s-model" title="Permalink to this headline">¶</a></h2>
+<p>CodeIgniter does provide a model class that provides a few nice features, including:</p>
+<ul class="simple">
+<li>automatic database connection</li>
+<li>basic CRUD methods</li>
+<li>in-model validation</li>
+<li>and more</li>
+</ul>
+<p>This class provides a solid base from which to build your own models, allowing you to
+rapidly build out your application&#8217;s model layer.</p>
+</div>
+<div class="section" id="creating-your-model">
+<h2><a class="toc-backref" href="#id3">Creating Your Model</a><a class="headerlink" href="#creating-your-model" title="Permalink to this headline">¶</a></h2>
+<p>To take advantage of CodeIgniter&#8217;s model, you would simply create a new model class
+that extends <tt class="docutils literal"><span class="pre">CodeIgniter\Model</span></tt>:</p>
+<div class="highlight-ci"><div class="highlight"><pre><span class="k">class</span> <span class="nc">UserModel</span> <span class="k">extends</span> <span class="nx">\CodeIgniter\Model</span>
+<span class="p">{</span>
+
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>This empty class provides convenient access to the database connection, the Query Builder,
+and a number of additional convenience methods.</p>
+<div class="section" id="connecting-to-the-database">
+<h3><a class="toc-backref" href="#id4">Connecting to the Database</a><a class="headerlink" href="#connecting-to-the-database" title="Permalink to this headline">¶</a></h3>
+<p>When the class is first instantiated, if no database connection instance is passed to constructor,
+it will automatically connect to the default database group, as set in the configuration. You can
+modify which group is used on a per-model basis by adding the DBGroup property to your class.
+This ensures that within the model any references to <tt class="docutils literal"><span class="pre">$this-&gt;db</span></tt> are made through the appropriate
+connection.</p>
+<div class="highlight-ci"><div class="highlight"><pre><span class="k">class</span> <span class="nc">UserModel</span> <span class="k">extends</span> <span class="nx">\CodeIgniter\Model</span>
+<span class="p">{</span>
+        <span class="k">protected</span> <span class="nv">$DBGroup</span> <span class="o">=</span> <span class="s1">&#39;group_name&#39;</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>You would replace &#8220;group_name&#8221; with the name of a defined database group from the database
+configuration file.</p>
+</div>
+<div class="section" id="configuring-your-model">
+<h3><a class="toc-backref" href="#id5">Configuring Your Model</a><a class="headerlink" href="#configuring-your-model" title="Permalink to this headline">¶</a></h3>
+<p>The model class has a few configuration options that can be set to allow the class&#8217; methods
+to work seamlessly for you. The first two are used by all of the CRUD methods to determine
+what table to use and how we can find the required records.:</p>
+<div class="highlight-ci"><div class="highlight"><pre><span class="k">class</span> <span class="nc">UserModel</span> <span class="k">extends</span> <span class="nx">\CodeIgniter\Model</span>
+<span class="p">{</span>
+        <span class="k">protected</span> <span class="nv">$table</span>      <span class="o">=</span> <span class="s1">&#39;users&#39;</span><span class="p">;</span>
+        <span class="k">protected</span> <span class="nv">$primaryKey</span> <span class="o">=</span> <span class="s1">&#39;id&#39;</span><span class="p">;</span>
+
+        <span class="k">protected</span> <span class="nv">$returnType</span> <span class="o">=</span> <span class="s1">&#39;array&#39;</span><span class="p">;</span>
+        <span class="k">protected</span> <span class="nv">$useSoftDeletes</span> <span class="o">=</span> <span class="k">true</span><span class="p">;</span>
+
+        <span class="k">protected</span> <span class="nv">$allowedFields</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;email&#39;</span><span class="p">];</span>
+
+        <span class="k">protected</span> <span class="nv">$useTimestamps</span> <span class="o">=</span> <span class="k">false</span><span class="p">;</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p><strong>$table</strong></p>
+<p>Specifies the database table that this model primarily works with. This only applies to the
+built-in CRUD methods. You are not restricted to using only this table in your own
+queries.</p>
+<p><strong>$primaryKey</strong></p>
+<p>This is the name of the column that uniquely identifies the records in this table. This
+does not necessarilly have to match the primary key that is specified in the database, but
+is used with methods like <tt class="docutils literal"><span class="pre">find()</span></tt> to know what column to match the specified value to.</p>
+<p><strong>$returnType</strong></p>
+<p>The Model&#8217;s CRUD methods will take a step of work away from you and automatically return
+the resulting data, instead of the Result object. This setting allows you to define
+the type of data that is returned. Valid values are &#8216;array&#8217;, &#8216;object&#8217;, or the fully
+qualified name of a class that can be used with the Result object&#8217;s getCustomResultObject()
+method.</p>
+<p><strong>$useSoftDeletes</strong></p>
+<p>If true, then any delete* method calls will simply set a flag in the database, instead of
+actually deleting the row. This can preserve data when it might be referenced elsewhere, or
+can maintain a &#8220;recylce bin&#8221; of objects that can be restored, or even simply preserve it as
+part of a security trail. If true, the find* methods will only return non-deleted rows, unless
+the withDeleted() method is called prior to calling the find* method.</p>
+<p>This requires an INT or TINYINT field named <tt class="docutils literal"><span class="pre">deleted</span></tt> to be present in the table.</p>
+<p><strong>$allowedFields</strong></p>
+<p>This array should be updated with the field names that can be set during save, insert, or
+update methods. Any field names other than these will be discarded. This helps to protect
+against just taking input from a form and throwing it all at the model, resulting in
+potential mass assignment vulnerabilities.</p>
+<p><strong>$useTimestamps</strong></p>
+<p>This boolean value determines whether the current date is automatically added to all inserts
+and updates. If true, will set the current time in the format specified by $dateFormat. This
+requires that the table have columns named &#8216;created_at&#8217; and &#8216;updated_at&#8217; in the appropriate
+data type.</p>
+<p><strong>$dateFormat</strong></p>
+<p>This value works with $useTimestamps to ensure that the correct type of date value gets
+inserted into the database. By default, this creates DATETIME values, but valid options
+are: datetime, date, or int (a PHP timestamp).</p>
+</div>
+</div>
+<div class="section" id="working-with-data">
+<h2><a class="toc-backref" href="#id6">Working With Data</a><a class="headerlink" href="#working-with-data" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="finding-data">
+<h3><a class="toc-backref" href="#id7">Finding Data</a><a class="headerlink" href="#finding-data" title="Permalink to this headline">¶</a></h3>
+<p>Several functions are provided for doing basic CRUD work on your tables, including find(),
+insert(), update(), delete() and more.</p>
+<p><strong>find()</strong></p>
+<p>Returns a single row where the primary key matches the value passed in as the first parameter:</p>
+<div class="highlight-ci"><div class="highlight"><pre><span class="nv">$user</span> <span class="o">=</span> <span class="nv">$userModel</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">(</span><span class="nv">$user_id</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>The value is returned in the format specified in $returnType.</p>
+<p>You can specify more than one row to return by passing an array of primaryKey values instead
+of just one.:</p>
+<div class="highlight-ci"><div class="highlight"><pre><span class="nv">$users</span> <span class="o">=</span> <span class="nv">$userModel</span><span class="o">-&gt;</span><span class="na">find</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">]);</span>
+</pre></div>
+</div>
+<p><strong>findWhere()</strong></p>
+<p>Allows you to specify one or more criteria that must be matched against the data. Returns
+all rows that match:</p>
+<div class="highlight-ci"><div class="highlight"><pre><span class="c1">// Use simple where</span>
+<span class="nv">$users</span> <span class="o">=</span> <span class="nv">$userModel</span><span class="o">-&gt;</span><span class="na">findWhere</span><span class="p">(</span><span class="s1">&#39;role_id &gt;&#39;</span><span class="p">,</span> <span class="s1">&#39;10&#39;</span><span class="p">);</span>
+
+<span class="c1">// Use array of where values</span>
+<span class="nv">$users</span> <span class="o">=</span> <span class="nv">$userModel</span><span class="o">-&gt;</span><span class="na">findWhere</span><span class="p">([</span>
+        <span class="s1">&#39;status&#39;</span>  <span class="o">=&gt;</span> <span class="s1">&#39;active&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;deleted&#39;</span> <span class="o">=&gt;</span> <span class="mi">0</span>
+<span class="p">]);</span>
+</pre></div>
+</div>
+<p><strong>findAll()</strong></p>
+<p>Returns all results.</p>
+<blockquote>
+<div>$users = $userModel-&gt;findAll();</div></blockquote>
+<p>This query may be modified by interjecting Query Builder commands as needed prior to calling this method.:</p>
+<div class="highlight-ci"><div class="highlight"><pre><span class="nv">$users</span> <span class="o">=</span> <span class="nv">$userModel</span><span class="o">-&gt;</span><span class="na">where</span><span class="p">(</span><span class="s1">&#39;active&#39;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+                   <span class="o">-&gt;</span><span class="na">findAll</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>You can pass in a limit and offset values as the first and second
+parameters, respectively:</p>
+<div class="highlight-ci"><div class="highlight"><pre><span class="nv">$users</span> <span class="o">=</span> <span class="nv">$userModel</span><span class="o">-&gt;</span><span class="na">findAll</span><span class="p">(</span><span class="nv">$limit</span><span class="p">,</span> <span class="nv">$offset</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><strong>first()</strong></p>
+<p>Returns the first row in the result set. This is best used in combination with the query builder.</p>
+<div class="highlight-ci"><div class="highlight"><pre><span class="nv">$user</span> <span class="o">=</span> <span class="nv">$userModel</span><span class="o">-&gt;</span><span class="na">where</span><span class="p">(</span><span class="s1">&#39;deleted&#39;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+                  <span class="o">-&gt;</span><span class="na">first</span><span class="p">();</span>
+</pre></div>
+</div>
+<p><strong>withDeleted()</strong></p>
+<p>If $useSoftDeletes is true, then the find* methods will not return any rows where &#8216;deleted = 1&#8217;. To
+temporarily override this, you can use the withDeleted() method prior to calling the find* method.</p>
+<div class="highlight-ci"><div class="highlight"><pre><span class="c1">// Only gets non-deleted rows (deleted = 0)</span>
+<span class="nv">$activeUsers</span> <span class="o">=</span> <span class="nv">$userModel</span><span class="o">-&gt;</span><span class="na">findAll</span><span class="p">();</span>
+
+<span class="c1">// Gets all rows</span>
+<span class="nv">$allUsers</span> <span class="o">=</span> <span class="nv">$userModel</span><span class="o">-&gt;</span><span class="na">withDeleted</span><span class="p">()</span>
+                      <span class="o">-&gt;</span><span class="na">findAll</span><span class="p">();</span>
+</pre></div>
+</div>
+<p><strong>onlyDeleted()</strong></p>
+<p>Whereas withDeleted() will return both deleted and not-deleted rows, this method modifies
+the next find* methods to return only soft deleted rows.:</p>
+<div class="highlight-ci"><div class="highlight"><pre><span class="nv">$deletedUsers</span> <span class="o">=</span> <span class="nv">$userModel</span><span class="o">-&gt;</span><span class="na">onlyDeleted</span><span class="p">()</span>
+                                                  <span class="o">-&gt;</span><span class="na">findAll</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="saving-data">
+<h3><a class="toc-backref" href="#id8">Saving Data</a><a class="headerlink" href="#saving-data" title="Permalink to this headline">¶</a></h3>
+<p><strong>insert()</strong></p>
+<p>An associative array of data is passed into this method as the only parameter to create a new
+row of data in the database. The array&#8217;s keys must match the name of the columns in $table, while
+the array&#8217;s values are the values to save for that key:</p>
+<div class="highlight-ci"><div class="highlight"><pre><span class="nv">$data</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s1">&#39;username&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;darth&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;email&#39;</span>    <span class="o">=&gt;</span> <span class="s1">&#39;d.vader@theempire.com&#39;</span>
+<span class="p">];</span>
+
+<span class="nv">$userModel</span><span class="o">-&gt;</span><span class="na">insert</span><span class="p">(</span><span class="nv">$data</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><strong>update()</strong></p>
+<p>Updates an existing record in the database. The first parameter is the $primaryKey of the record to update.
+An associative array of data is passed into this method as the second parameter. The array&#8217;s keys must match the name
+of the columns in $table, while the array&#8217;s values are the values to save for that key:</p>
+<div class="highlight-ci"><div class="highlight"><pre><span class="nv">$data</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s1">&#39;username&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;darth&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;email&#39;</span>    <span class="o">=&gt;</span> <span class="s1">&#39;d.vader@theempire.com&#39;</span>
+<span class="p">];</span>
+
+<span class="nv">$userModel</span><span class="o">-&gt;</span><span class="na">update</span><span class="p">(</span><span class="nv">$id</span><span class="p">,</span> <span class="nv">$data</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><strong>save()</strong></p>
+<p>This is a wrapper around the insert() and update() methods that handles inserting or updating the record
+automatically, based on whether it finds an array key matching the $primaryKey value:</p>
+<div class="highlight-ci"><div class="highlight"><pre><span class="c1">// Defined as a model property</span>
+<span class="nv">$primaryKey</span> <span class="o">=</span> <span class="s1">&#39;id&#39;</span><span class="p">;</span>
+
+<span class="c1">// Does an insert()</span>
+<span class="nv">$data</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s1">&#39;username&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;darth&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;email&#39;</span>    <span class="o">=&gt;</span> <span class="s1">&#39;d.vader@theempire.com&#39;</span>
+<span class="p">];</span>
+
+<span class="nv">$userModel</span><span class="o">-&gt;</span><span class="na">save</span><span class="p">(</span><span class="nv">$data</span><span class="p">);</span>
+
+<span class="c1">// Performs an update, since the primary key, &#39;id&#39;, is found.</span>
+<span class="nv">$data</span> <span class="o">=</span> <span class="p">[</span>
+        <span class="s1">&#39;id&#39;</span>       <span class="o">=&gt;</span> <span class="mi">3</span><span class="p">,</span>
+        <span class="s1">&#39;username&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;darth&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;email&#39;</span>    <span class="o">=&gt;</span> <span class="s1">&#39;d.vader@theempire.com&#39;</span>
+<span class="p">];</span>
+<span class="nv">$userModel</span><span class="o">-&gt;</span><span class="na">save</span><span class="p">(</span><span class="nv">$data</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="deleting-data">
+<h3><a class="toc-backref" href="#id9">Deleting Data</a><a class="headerlink" href="#deleting-data" title="Permalink to this headline">¶</a></h3>
+<p><strong>delete()</strong></p>
+<p>Takes a primary key value as the first parameter and deletes the matching record from the model&#8217;s table:</p>
+<div class="highlight-ci"><div class="highlight"><pre><span class="nv">$userModel</span><span class="o">-&gt;</span><span class="na">delete</span><span class="p">(</span><span class="mi">12</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>If the model&#8217;s $useSoftDeletes value is true, this will update the row to set &#8216;deleted = 1&#8217;. You can force
+a permanent delete by setting the second parameter as true.</p>
+<p><strong>deleteWhere()</strong></p>
+<p>Deletes multiple records from the model&#8217;s table based on the criteria pass into the first two parameters.</p>
+<div class="highlight-ci"><div class="highlight"><pre><span class="c1">// Simple where</span>
+<span class="nv">$userMdoel</span><span class="o">-&gt;</span><span class="na">deleteWhere</span><span class="p">(</span><span class="s1">&#39;status&#39;</span><span class="p">,</span> <span class="s1">&#39;inactive&#39;</span><span class="p">);</span>
+
+<span class="c1">// Complex where</span>
+<span class="nv">$userModel</span><span class="o">-&gt;</span><span class="na">deleteWhere</span><span class="p">([</span>
+        <span class="s1">&#39;status&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;inactive&#39;</span><span class="p">,</span>
+        <span class="s1">&#39;warn_lvl &gt;=&#39;</span> <span class="o">=&gt;</span> <span class="mi">50</span>
+<span class="p">]);</span>
+</pre></div>
+</div>
+<p>If the model&#8217;s $useSoftDeletes value is true, this will update the rows to set &#8216;deleted = 1&#8217;. You can force
+a permanent delete by setting the third parameter as true.</p>
+<p><strong>purgeDeleted()</strong></p>
+<p>Cleans out the database table by permanently removing all rows that have &#8216;deleted = 1&#8217;.</p>
+<div class="highlight-ci"><div class="highlight"><pre><span class="nv">$userModel</span><span class="o">-&gt;</span><span class="na">purgeDeleted</span><span class="p">();</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="protecting-fields">
+<h3><a class="toc-backref" href="#id10">Protecting Fields</a><a class="headerlink" href="#protecting-fields" title="Permalink to this headline">¶</a></h3>
+<p>To help protect against Mass Assignment Attacks, the Model class requires that you list all of the field names
+that can be changed during inserts and updates in the <tt class="docutils literal"><span class="pre">$allowedFields</span></tt> class property. Any data provided
+in addition to these will be removed prior to hitting the database. This is great for ensuring that timestamps,
+or primary keys do not get changed.</p>
+<div class="highlight-ci"><div class="highlight"><pre><span class="k">protected</span> <span class="nv">$allowedFields</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;email&#39;</span><span class="p">,</span> <span class="s1">&#39;address&#39;</span><span class="p">];</span>
+</pre></div>
+</div>
+<p>Occasionally, you will find times where you need to be able to change these elements. This is often during
+testing, migrations, or seeds. In these cases, you can turn the protection on or off:</p>
+<div class="highlight-ci"><div class="highlight"><pre><span class="nv">$model</span><span class="o">-&gt;</span><span class="na">protect</span><span class="p">(</span><span class="k">false</span><span class="p">)</span>
+          <span class="o">-&gt;</span><span class="na">insert</span><span class="p">(</span><span class="nv">$data</span><span class="p">)</span>
+          <span class="o">-&gt;</span><span class="na">protect</span><span class="p">(</span><span class="k">true</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="working-with-query-builder">
+<h3><a class="toc-backref" href="#id11">Working With Query Builder</a><a class="headerlink" href="#working-with-query-builder" title="Permalink to this headline">¶</a></h3>
+<p>You can get access to a shared instance of the Query Builder for that model&#8217;s database connection any time you
+need it:</p>
+<div class="highlight-ci"><div class="highlight"><pre><span class="nv">$builder</span> <span class="o">=</span> <span class="nv">$userModel</span><span class="o">-&gt;</span><span class="na">builder</span><span class="p">();</span>
+</pre></div>
+</div>
+<p>This builder is already setup with the model&#8217;s $table.</p>
+<p>You can also use Query Builder methods and the Model&#8217;s CRUD methods in the same chained call, allowing for
+very elegant use:</p>
+<div class="highlight-ci"><div class="highlight"><pre><span class="nv">$users</span> <span class="o">=</span> <span class="nv">$userModel</span><span class="o">-&gt;</span><span class="na">where</span><span class="p">(</span><span class="s1">&#39;status&#39;</span><span class="p">,</span> <span class="s1">&#39;active&#39;</span><span class="p">)</span>
+                                        <span class="o">-&gt;</span><span class="na">orderBy</span><span class="p">(</span><span class="s1">&#39;last_login&#39;</span><span class="p">,</span> <span class="s1">&#39;asc&#39;</span><span class="p">)</span>
+                                        <span class="o">-&gt;</span><span class="na">findAll</span><span class="p">();</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p>You can also access the model&#8217;s database connection seamlessly:</p>
+<div class="last highlight-ci"><div class="highlight"><pre><span class="nv">$user_name</span> <span class="o">=</span> <span class="nv">$userModel</span><span class="o">-&gt;</span><span class="na">escape</span><span class="p">(</span><span class="nv">$name</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="runtime-return-type-changes">
+<h3><a class="toc-backref" href="#id12">Runtime Return Type Changes</a><a class="headerlink" href="#runtime-return-type-changes" title="Permalink to this headline">¶</a></h3>
+<p>You can specify the format that data should be returned as when using the find*() methods as the class property,
+$returnType. There may be times that you would like the data back in a different format, though. The Model
+provides methods that allow you to do just that.</p>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">These methods only change the return type for the next find*() method call. After that,
+it is reset to its default value.</p>
+</div>
+<p><strong>asArray()</strong></p>
+<p>Returns data from the next find*() method as associative arrays:</p>
+<div class="highlight-ci"><div class="highlight"><pre><span class="nv">$users</span> <span class="o">=</span> <span class="nv">$userModel</span><span class="o">-&gt;</span><span class="na">asArray</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">findWhere</span><span class="p">(</span><span class="s1">&#39;status&#39;</span><span class="p">,</span> <span class="s1">&#39;active&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+<p><strong>asObject()</strong></p>
+<p>Returns data from the next find*() method as standard objects or custom class intances:</p>
+<div class="highlight-ci"><div class="highlight"><pre><span class="c1">// Return as standard objects</span>
+<span class="nv">$users</span> <span class="o">=</span> <span class="nv">$userModel</span><span class="o">-&gt;</span><span class="na">asObject</span><span class="p">()</span><span class="o">-&gt;</span><span class="na">findWhere</span><span class="p">(</span><span class="s1">&#39;status&#39;</span><span class="p">,</span> <span class="s1">&#39;active&#39;</span><span class="p">);</span>
+
+<span class="c1">// Return as custom class instances</span>
+<span class="nv">$users</span> <span class="o">=</span> <span class="nv">$userModel</span><span class="o">-&gt;</span><span class="na">asObject</span><span class="p">(</span><span class="s1">&#39;User&#39;</span><span class="p">)</span><span class="o">-&gt;</span><span class="na">findWhere</span><span class="p">(</span><span class="s1">&#39;status&#39;</span><span class="p">,</span> <span class="s1">&#39;active&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="processing-large-amounts-of-data">
+<h3><a class="toc-backref" href="#id13">Processing Large Amounts of Data</a><a class="headerlink" href="#processing-large-amounts-of-data" title="Permalink to this headline">¶</a></h3>
+<p>Sometimes, you need to process large amounts of data and would run the risk of running out of memory.
+To make this simpler, you may use the chunk() method to get smaller chunks of data that you can then
+do your work on. The first parameter is the number of rows to retrieve in a single chunk. The second
+parameter is a Closure that will be called for each row of data.</p>
+<p>This is best used during cronjobs, data exports, or other large tasks.</p>
+<div class="highlight-ci"><div class="highlight"><pre><span class="nv">$userModel</span><span class="o">-&gt;</span><span class="na">chunk</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="k">function</span> <span class="p">(</span><span class="nv">$data</span><span class="p">)</span>
+<span class="p">{</span>
+        <span class="c1">// do something.</span>
+        <span class="c1">// $data is a single row of data.</span>
+<span class="p">});</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="obfuscating-ids-in-urls">
+<h3><a class="toc-backref" href="#id14">Obfuscating IDs in URLs</a><a class="headerlink" href="#obfuscating-ids-in-urls" title="Permalink to this headline">¶</a></h3>
+<p>Instead of displaying the resource&#8217;s ID in the URL (i.e. /users/123), the model provides a simple
+way to obfuscate the ID. This provides some protection against attackers simply incrementing IDs in the
+URL to do bad things to your data.</p>
+<p>This is not a valid security use, but another simple layer of protection. Determined attackers could very easily
+determine the actual ID.</p>
+<p>The data is not stored in the database at any time, it is simply used to disguise the ID. When creating a URL
+you can use the <strong>encodeID()</strong> method to get the hashed ID.</p>
+<div class="highlight-ci"><div class="highlight"><pre><span class="c1">// Creates something like: http://exmample.com/users/MTIz</span>
+<span class="nv">$url</span> <span class="o">=</span> <span class="s1">&#39;/users/&#39;</span><span class="o">.</span> <span class="nv">$model</span><span class="o">-&gt;</span><span class="na">encodeID</span><span class="p">(</span><span class="nv">$user</span><span class="o">-&gt;</span><span class="na">id</span><span class="p">);</span>
+</pre></div>
+</div>
+<p>When you need to grab the item in your controller, you can use the <strong>findByHashedID()</strong> method instead of the
+<strong>find()</strong> method.</p>
+<div class="highlight-ci"><div class="highlight"><pre><span class="k">public</span> <span class="k">function</span> <span class="nf">show</span><span class="p">(</span><span class="nv">$hashedID</span><span class="p">)</span>
+<span class="p">{</span>
+        <span class="nv">$user</span> <span class="o">=</span> <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">model</span><span class="o">-&gt;</span><span class="na">findByHashedID</span><span class="p">(</span><span class="nv">$hashedID</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+<p>If you ever need to decode the hash, you may do so with the <strong>decodeID()</strong> method.</p>
+<div class="highlight-ci"><div class="highlight"><pre><span class="nv">$hash</span> <span class="o">=</span> <span class="nv">$model</span><span class="o">-&gt;</span><span class="na">encodeID</span><span class="p">(</span><span class="mi">123</span><span class="p">);</span>
+<span class="nv">$check</span> <span class="o">=</span> <span class="nv">$model</span><span class="o">-&gt;</span><span class="na">decodeID</span><span class="p">(</span><span class="nv">$hash</span><span class="p">);</span>
+</pre></div>
+</div>
+<div class="admonition note">
+<p class="first admonition-title">Note</p>
+<p class="last">While the name is &#8220;hashed id&#8221;, this is not actually a hashed variable, but that term has become
+common in many circles to represent the encoding of an ID into a short, unique, identifier.</p>
+</div>
+</div>
+</div>
+</div>
+
+
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="forge.html" class="btn btn-neutral float-right" title="Database Forge Class">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="call_function.html" class="btn btn-neutral" title="Custom Function Calls"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2014 - 2016, British Columbia Institute of Technology.
+       Last updated on Jun 25, 2016.
+    </p>
+  </div>
+
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+  
+</footer>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'../',
+            VERSION:'4.0.0-dev',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  false
+        };
+    </script>
+      <script type="text/javascript" src="../_static/jquery.js"></script>
+      <script type="text/javascript" src="../_static/underscore.js"></script>
+      <script type="text/javascript" src="../_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
